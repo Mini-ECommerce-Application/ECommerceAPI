@@ -22,13 +22,17 @@ namespace ECommerceAPI.API.Controllers
         [HttpGet] // action fonksiyonlarımızda http aksiyonlarını kullanmadığımız takdirde swagger'da hata alıyoruz.
         public async Task Get()
         {
-            await _productWriteRepository.AddRangeAsync(new()
-            {
-                new () { Id = Guid.NewGuid(), Name = "Product 1", Price = 100, Stock = 10, CreatedDate = DateTime.UtcNow  },
-                new () { Id = Guid.NewGuid(), Name = "Product 2", Price = 200, Stock = 20 , CreatedDate = DateTime.UtcNow },
-                new () { Id = Guid.NewGuid(), Name = "Product 3", Price = 300, Stock = 30, CreatedDate = DateTime.UtcNow  },
-            });
-            await _productWriteRepository.SaveAsync();
+            //await _productWriteRepository.AddRangeAsync(new()
+            //{
+            //    new () { Id = Guid.NewGuid(), Name = "Product 1", Price = 100, Stock = 10, CreatedDate = DateTime.UtcNow  },
+            //    new () { Id = Guid.NewGuid(), Name = "Product 2", Price = 200, Stock = 20 , CreatedDate = DateTime.UtcNow },
+            //    new () { Id = Guid.NewGuid(), Name = "Product 3", Price = 300, Stock = 30, CreatedDate = DateTime.UtcNow  },
+            //});
+            //await _productWriteRepository.SaveAsync();
+
+            Product product = await _productReadRepository.GetByIdAsync("0c754e55-2b9e-4f5b-ba12-b5d9dbc689c4", false);
+            product.Name = "Updatedasdas Product";
+            _productWriteRepository.SaveAsync();
         }
 
         [HttpGet("{id}")]
