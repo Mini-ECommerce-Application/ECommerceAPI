@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities;
 using ECommerceAPI.Persistance.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpGet] // action fonksiyonlarımızda http aksiyonlarını kullanmadığımız takdirde swagger'da hata alıyoruz.
-        public async void Get()
+        public async Task Get()
         {
             await _productWriteRepository.AddRangeAsync(new()
             {
@@ -28,6 +29,14 @@ namespace ECommerceAPI.API.Controllers
                 new () { Id = Guid.NewGuid(), Name = "Product 3", Price = 300, Stock = 30, CreatedDate = DateTime.UtcNow  },
             });
             await _productWriteRepository.SaveAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            Product product = await _productReadRepository.GetByIdAsync(id);
+
+            return Ok(product);
         }
     }
 }

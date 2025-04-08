@@ -34,6 +34,7 @@ namespace ECommerceAPI.Persistance.Repositories
 
         // Yukarıdaki kısımda where T : BaseEntity kısıtlaması koyduk. Bu sayede sadece BaseEntity sınıfından türetilmiş olan varlıkları kullanabiliriz. Bu kısıtlama, ReadRepository sınıfının Generic bir sınıf olmasını sağlar ve sadece BaseEntity sınıfından türetilmiş varlıklarla çalışmasına izin verir.
         public async Task<T> GetByIdAsync(string id)
-        => await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id)); // Reflection kullanmaktansa BaseEntity kısıtlaması kullanarak Id'yi Guid olarak parse ettik.
+        //=> await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id)); // Reflection kullanmaktansa Markered Pattern'i kullanarak BaseEntity kısıtlaması uyguladık. Id'yi Guid olarak parse ettik.
+        => await Table.FindAsync(Guid.Parse(id)); // FindAsync metodu, verilen id'ye göre varlığı bulur. Eğer varlık bulunamazsa null döner.
     }
 }

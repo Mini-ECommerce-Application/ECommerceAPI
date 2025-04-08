@@ -11,14 +11,14 @@ namespace ECommerceAPI.Persistance
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<ECommerceAPIDbContext>(options =>
-                options.UseNpgsql(Configuration.ConnectionString), ServiceLifetime.Singleton);
+                options.UseNpgsql(Configuration.ConnectionString));
             // AddSingleton kullanmamızın sebebi, DbContext'in her istekte yeni bir örneğinin oluşturulmasını istemememizdir. Bu sayede, DbContext'in yaşam süresi uygulama boyunca tek bir örnek olarak kalır.
-            services.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
-            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
-            services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
-            services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
-            services.AddSingleton<IProductReadRepository, ProductReadRepository>();
-            services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
         }
     }
 }
