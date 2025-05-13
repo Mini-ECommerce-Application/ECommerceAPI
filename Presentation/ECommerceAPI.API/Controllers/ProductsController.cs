@@ -28,12 +28,11 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpGet] // action fonksiyonlarımızda http aksiyonlarını kullanmadığımız takdirde swagger'da hata alıyoruz.
-        public async Task Get()
+        public async Task<IActionResult> Get()
         {
             Order order = await _orderReadRepository.GetByIdAsync("725778af-3032-480c-be5f-c71cbcac2281");
-            order.Description = "Updated description";
 
-            await _orderWriteRepository.SaveAsync();
+            return Ok(order);
         }
 
     }
