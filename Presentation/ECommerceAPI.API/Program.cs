@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistenceServices();
 
-// CORS yap?land?rmas?
+// CORS configuration
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy
         .WithOrigins("http://localhost:4200")
