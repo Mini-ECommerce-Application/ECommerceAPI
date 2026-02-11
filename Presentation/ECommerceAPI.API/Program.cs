@@ -16,7 +16,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials()
-)); 
+));
 
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>())
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>())
