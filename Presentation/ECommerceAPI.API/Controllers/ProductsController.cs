@@ -83,7 +83,7 @@ namespace ECommerceAPI.API.Controllers
             await _productWriteRepository.RemoveAsync(id);
             await _productWriteRepository.SaveAsync();
 
-            return StatusCode((int)HttpStatusCode.OK);
+            return Ok();
         }
     }
 }
